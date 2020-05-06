@@ -6,8 +6,6 @@ import { renderEditProfeli } from './editProfeli.js';
 import {renderPost} from "./createPost.js";
 import {newPost} from "./createPost.js";
 
-
-//import { profil} from './createPost.js'; 
 let db= firebase.firestore();
 let userRef = db.collection('users');
 let main = document.querySelector('#main');
@@ -93,11 +91,10 @@ export const renderContent = () => {
               });
           let thought = document.querySelector("#thought");
               thought.addEventListener("click", () =>{ 
-                //profil();
                 console.log("Create post"); 
                 let userName = `${doc.data().name}`;
                 renderPost(userName, uiduser);
-                newPost(userName, uiduser); 
+                newPost(userName, uiduser, doc.data().photo); 
                 
               });
          let menu = document.querySelector("#menu");

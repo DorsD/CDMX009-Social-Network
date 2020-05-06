@@ -1,6 +1,5 @@
 import { readerMyTrips } from './myTrips.js';
 import Post from "./post.js";
-//import {renderProfile} from "./createPost.js";
 import {renderContent} from "./content.js";
 
 let db = firebase.firestore();
@@ -9,14 +8,6 @@ let postsRef = db.collection('posts');
 let storage = firebase.storage();
 let imgRef = storage.ref('images');
 let main = document.querySelector('#main');
-
-//let originalPost = 'n60Red5WLbXexfrHBymd';
-/*let originalPost =  
-gpFlL9t0x8A3CdsW6gGL
-n60Red5WLbXexfrHBymd
-nQG7x0vBh1fcwzsjyu6E
-pgltFxUCv1UTSoltAOmZ;*/ 
-
 
 export const editPost = (postId) =>{  
     
@@ -53,14 +44,6 @@ export const editPost = (postId) =>{
               imagesContainer.innerHTML = image;
               imagePost.value = null;
               console.log("Usuario quitó img:" + imagePost.value);
-              
-              /*
-              imgRef.child(postInfo.imageId).delete()
-              .then(function() {
-                console.log("Imagen borrada");
-              }).catch(function(error) {
-                console.log("Hay un error al borrar la imagen: " + error);
-              });*/
               validate();
             }
         }
@@ -82,8 +65,6 @@ export const editPost = (postId) =>{
             statusLabel.innerHTML = publicStatus;
             status = 'public';
         }
-        //newPost();
-        //sendPostBtn.disabled = false;
     })
     .catch((error)=> {
       console.log("Error al traer postInfo: " + error);
@@ -91,14 +72,12 @@ export const editPost = (postId) =>{
 
     span.onclick = function() {
       modal.style.display = "none";
-      //clean();
       readerMyTrips();
     }
   
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
-        //clean();
         readerMyTrips();
       }
     }
@@ -115,15 +94,6 @@ export const editPost = (postId) =>{
   
     textareaPost.addEventListener("input", e => {
       validate();
-    /*  if (textareaPost.value && textareaPost.value.trim() != ""){
-        sendPostBtn.disabled = false;
-      }else{
-        if (imagePost.files.length != 0){
-          sendPostBtn.disabled = false;
-        }else{
-          sendPostBtn.disabled = true;
-        }
-      }*/  
     });
   
     imagePost.addEventListener("change", e => {
@@ -132,7 +102,7 @@ export const editPost = (postId) =>{
       console.log(e.target.files[0]);
           
       if (imagePost.files.length != 0){
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function () {
           let image = `<img src="${reader.result}" class="imgPost" alt="${imagePost.files[0].name}" title="${imagePost.files[0].name}">
           <span class="remove-img">&times;</span>`
@@ -145,25 +115,15 @@ export const editPost = (postId) =>{
             imagePost.value = null;
             console.log("Usuario quitó img:" + imagePost.value);
             validate();
-            /*
-            if(textareaPost.value == ""){
-              sendPostBtn.disabled = true;
-              console.log("EL text es: " + textareaPost.value);
-            }else{
-              sendPostBtn.disabled = false;
-              console.log("EL text es: " + textareaPost.value);
-            }*/
           }
   
         }
         reader.readAsDataURL(imagePost.files[0]);
         validate();  
-        //sendPostBtn.disabled = false;
       }else{
         let image = ``
         imagesContainer.innerHTML = image;
         validate();
-        //sendPostBtn.disabled = true;
       }
       
     });
@@ -188,25 +148,6 @@ export const editPost = (postId) =>{
       validate();
     });
 
-    /*
-    const removeFromStorage = (originalPost) => {
-      postsRef.doc(originalPost).get()
-      .then(info => {
-        let postInfo = info.data();
-        console.log("postInfo.imageId: " + postInfo.imageId);
-        if(postInfo.imageId != ""){
-          imgRef.child(postInfo.imageId).delete()
-          .then(function() {
-            console.log("Imagen borrada");
-          }).catch(function(error) {
-            console.log("Hay un error al borrar la imagen: " + error);
-          });
-        }        
-      }).catch((error)=> {
-        console.log("Error al traer postInfo: " + error);
-      });
-    }*/
-  
     sendPostBtn.addEventListener("click", e => {
       
       sendPostBtn.disabled = true;
@@ -215,7 +156,6 @@ export const editPost = (postId) =>{
       let img = imagePost.files[0];
       let date = new Date();
       let idImg = date.getTime();
-      //let imageUrl = document.getElementsByClassName("imgPost")[0].src;
       let imageUrl = ((document.getElementsByClassName("imgPost")[0]) ? document.getElementsByClassName("imgPost")[0].src : '');
       status = ((statusPost.checked) ? 'private' : 'public');
       
@@ -225,7 +165,6 @@ export const editPost = (postId) =>{
       console.log('El src es: ' + imageUrl);
       
       if(img){
-        //removeFromStorage();
         console.log(originalPost);
         postsRef.doc(originalPost).get()
         .then(info => {
@@ -242,7 +181,6 @@ export const editPost = (postId) =>{
         }).then(e => {
           let token = idImg+'_'+img.name; 
           console.log("Subiendo img");  
-          //firebase.storage().ref("images").child(img.name).put(img)
           imgRef.child(token).put(img)
           .then(snap => {
             return snap.ref.getDownloadURL();
@@ -266,8 +204,6 @@ export const editPost = (postId) =>{
           console.log(imageUrl);
           updatePost(post,originalPost);
         }else{
-          //removeFromStorage();
-
           postsRef.doc(originalPost).get()
           .then(info => {
             let postInfo = info.data();
@@ -292,8 +228,6 @@ export const editPost = (postId) =>{
       }
     });
   }
-//}
-
 
 const updatePost = (post,originalPost) => {
 
@@ -311,7 +245,6 @@ const updatePost = (post,originalPost) => {
     console.log("Post actualizado: " + data);
     modal.style.display = "none";
     readerMyTrips();
-    //clean();
   })
   .catch((error)=> {
     console.log("Error al guardar post: " + error);

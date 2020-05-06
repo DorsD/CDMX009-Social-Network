@@ -1,6 +1,7 @@
 import User from "./user.js";
 import {router} from './index.js';  
-import {userStatus} from './index.js';  
+import {userStatus} from './index.js'; 
+ 
 
 const db = firebase.firestore();
 const usersRef = db.collection('users'); 
@@ -38,22 +39,20 @@ export const authGoogle = () => {
             "uid":usuario.uid
           })
           console.log('Ya guardé los datos del user')
-          //console.log('No matching documents.');
-          //userStatus(); 
+          
         }else{
          console.log("ya esta registrado") 
         }
     })
-  })
-  .catch(function(error) {
+  }).catch(function(error) {
     console.log('Hay un error en Google');
-    var errorCode = error.code;
+    let errorCode = error.code;
     console.log(errorCode);
-    var errorMessage = error.message;
+    let errorMessage = error.message;
     console.log(errorMessage);
-    var email = error.email;
+    let email = error.email;
     console.log(email);
-    var credential = error.credential;
+    let credential = error.credential;
     console.log(credential);
    
   });
@@ -98,13 +97,13 @@ export const authFacebook = () => {
  })
   .catch(function(error) {
   console.log('Hay un error en Facebook');
-    var errorCode = error.code;
+    let errorCode = error.code;
     console.log(errorCode);
-    var errorMessage = error.message;
+    let errorMessage = error.message;
     console.log(errorMessage);
-    var email = error.email;
+    let email = error.email;
     console.log(email);
-    var credential = error.credential;
+    let credential = error.credential;
     console.log(credential);
    
   });
