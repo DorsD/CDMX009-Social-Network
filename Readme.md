@@ -169,7 +169,7 @@ anterior en la siguiente sección.
 
 * [x] [Firestore](https://firebase.google.com/docs/firestore)
 * [x] [Firebase Auth](https://firebase.google.com/docs/auth/web/start)
-* [x] [Firebase security rules](https://firebase.google.com/docs/rules)
+* [ ] [Firebase security rules](https://firebase.google.com/docs/rules)
 * [x] [Uso de onSnapshot](https://firebase.google.com/docs/firestore/query-data/listen)
 | [onAuthStateChanged](https://firebase.google.com/docs/auth/web/start#set_an_authentication_state_observer_and_get_user_data)
 
