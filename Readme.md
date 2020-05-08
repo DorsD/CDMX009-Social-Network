@@ -7,7 +7,7 @@ TripLife es una red social para viajeros creada para compartir y recordar tus hi
 
 ## Aplicación
 
-Esta aplicación fue creada para aquellas personas que viajan por largas temporadas como parte de su estilo de vida y no solo en temporada vacacional, para quienes se incorporan a las costumbres y cultura, y que buscan conocer más que solo los lugares emblemáticos de una región.    
+Esta single page app (SPA) implementada con javascript y firebase, es una aplicación creada para aquellas personas que viajan por largas temporadas como parte de su estilo de vida y no solo en temporada vacacional, para quienes se incorporan a las costumbres y cultura, y que buscan conocer más que solo los lugares emblemáticos de una región.    
 
 Necesidades del usuario:
 
